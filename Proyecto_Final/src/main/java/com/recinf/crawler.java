@@ -28,13 +28,23 @@ class Crawler {
 
         Pattern corpus = Pattern.compile("^corpus\\/"); // Buscamos los documentos con href /corpus/"Referencia"
 
+        // Ya almacenados en el directorio corpus.
+        File folder = new File(ruta);
+        File[] files = folder.listFiles();
+
+        for(File i : files)
+        {
+            URLVistadas.add(i.getName());
+        }
+
+
         cola.add(s);
         do {
             String p = cola.poll();
             String[] sp = p.split("/");
             String fileName = ruta + sp[sp.length - 1]; // Nombre que tendrá el archivo.
             if (!URLVistadas.contains(p)) {
-                if (sp[sp.length - 2].equals("corpus")) {
+                if (sp[sp.length - 2].equals("corpus") && !URLVistadas.contains(sp[sp.length-1])) { //Comprueba que sea corpus y que no esté ya almacenado.
                     try{
                         URL url = new URL(p);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
