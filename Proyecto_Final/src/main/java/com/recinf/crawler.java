@@ -14,14 +14,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URI;
+
+
+import java.io.File;
 
 class Crawler {
     public static void buscador(String s) {
+        System.out.println(System.getProperty("user.dir"));
         Queue<String> cola = new LinkedList<String>();
         HashSet<String> URLVistadas = new HashSet<String>();
 
-        String ruta = "C:\\Users\\danie\\Desktop\\HTML\\";
+        String ruta = System.getProperty("user.dir") + File.separator + "corpus" + File.separator;
 
         Pattern corpus = Pattern.compile("^corpus\\/"); // Buscamos los documentos con href /corpus/"Referencia"
 
@@ -48,7 +51,7 @@ class Crawler {
                         reader.close();
 
                         try (FileWriter writer = new FileWriter(fileName)) {
-                            writer.write(content.toString()); // Guarda el contenido HTML en el archivo.
+                            writer.write(content.toString());
                             URLVistadas.add(p);
                             System.out.println("Guardado en: " + fileName);
                         }
@@ -57,24 +60,33 @@ class Crawler {
                 } else {
                     try {
                         Document doc = Jsoup.connect(p).get();
-                        System.out.println(p);
 
-                        try (FileWriter writer = new FileWriter(fileName)) {
+                        //Omitimos el almacenaje del html inicial
+
+                        /*try (FileWriter writer = new FileWriter(fileName)) {
                             writer.write(doc.outerHtml()); // Guarda el contenido HTML en el archivo.
                             URLVistadas.add(p);
                             System.out.println("Guardado en: " + fileName);
-                        }
+                        }*/
 
                         Elements a = doc.select("a"); // Selecciona todas las etiquetas <a>
+                        String aux = new String();
+
+                        for(int i = 0 ; i<sp.length ; i++)
+                        {
+                            if (i!=sp.length-1)
+                            {
+                                aux = aux + sp[i] + "/";
+                            }
+
+                        }
 
                         for (Element link : a) {
                             String url = link.attr("href"); // Obtener el valor del atributo href.
 
                             Matcher corps = corpus.matcher(url);
                             if (corps.find()) {
-                                String stringAux = "https://raw.githubusercontent.com/PdedP/RECINF-Project/refs/heads/main/" + url;
-                                // System.out.println(stringAux);
-                                cola.add(stringAux);
+                                cola.add(aux + url);
                             }
                         }
 
