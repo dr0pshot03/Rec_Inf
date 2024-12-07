@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class calcularTF2 {
-    public void funcionTF2(HashMap<String, HashMap<String, Integer>> termsFrecuencia)
+    public static HashMap<String, Tupla> funcionTF2(HashMap<String, HashMap<String, Integer>> termsFrecuencia)
     {
         HashMap<String, Tupla> indiceInvertido = new HashMap<>();
         for(Map.Entry<String, HashMap<String, Integer>> i : termsFrecuencia.entrySet())
         {
             String archivo = i.getKey();
-            System.out.println("Archivo: "+archivo);
+            //System.out.println("Archivo: "+archivo);
             for(Map.Entry<String, Integer> j : i.getValue().entrySet())
             {
                 double tf = 1 + Math.log(j.getValue()) / Math.log(2);
@@ -29,16 +29,7 @@ public class calcularTF2 {
                 }
             }
         }
-
-        for (Map.Entry<String, Tupla> entry : indiceInvertido.entrySet()) {
-            String termino = entry.getKey();
-            Tupla tupla = entry.getValue();
-            System.out.println("Término: " + termino);
-            System.out.println("IDF: " + tupla.idf);
-            for (Map.Entry<String, Double> docEntry : tupla.docIDPeso.entrySet()) {
-                System.out.println("Documento: " + docEntry.getKey() + ", Peso: " + docEntry.getValue());
-            }
-        }
+        return indiceInvertido;
     }
 }
 
