@@ -31,6 +31,15 @@ public class calcularTF2 {
         }
         return indiceInvertido;
     }
+
+    public static HashMap<String, Tupla> IDF(HashMap<String, Tupla> indiceInvertido, int totalDocumentos)
+    {
+        for(Map.Entry<String, Tupla> j : indiceInvertido.entrySet())
+        {
+            j.getValue().idf = Math.log((double)totalDocumentos / j.getValue().docIDPeso.size()) / Math.log(2);
+        }
+        return indiceInvertido;
+    }
 }
 
 class Tupla {
