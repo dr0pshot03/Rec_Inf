@@ -19,6 +19,8 @@ public class App
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        
     }
 
     public static void escribirIndiceInvertidoEnArchivo(HashMap<String, Tupla> indiceInvertido, String nombreArchivo) throws IOException {
