@@ -50,8 +50,8 @@ public class filtros{
         return linea;
     }
     private static String caracteresRaros(String input)
-    {  
-        return input.replaceAll("([.,¿?¡!='();]|(?<=\\s)-|-(?=\\s))", "");
+    { 
+        return input.replaceAll("([.,¿?¡!='();\"]|(?<=\\s)-|-(?=\\s))", "");
     }
 
     private static String numeros(String input)
