@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
-public class calcurarTF1 {
+public class calcularTF1 {
 
     public static HashMap funcionTF1()
     {
