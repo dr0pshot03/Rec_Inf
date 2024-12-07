@@ -42,8 +42,8 @@ public class filtros{
     public static String prepocesar(String linea)
     {
         linea=linea.toLowerCase();
-        linea=caracteresRaros(linea);
         linea=numeros(linea);
+        linea=caracteresRaros(linea);
         linea=palabrasvacias(linea);
         linea.replaceAll(" +", " ");
         //System.out.println(linea + "\n");
