@@ -1,36 +1,36 @@
-package Proyecto_Final.src.main.java.com.recinf;
-import java.util.regex.Pattern;
+package com.recinf;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
+import java.io.FileWriter;
 
 public class filtros{
     public static void main(String[] args)
     {
-        String directorPath = "../../../../../../corpus";
-        File directory = new File(directorPath);
+        String ruta = System.getProperty("user.dir") + File.separator + "corpus\\";
+        String ruta_procesada = System.getProperty("user.dir") + File.separator + "corpus_procesado\\";
+        File directory = new File(ruta);
         if (directory.isDirectory()){
             File[] archivos = directory.listFiles();
             for (File archivo : archivos) {
-                
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "UTF-8"))) {
-                    String linea;
-                    System.out.println("archivo:" + archivo + "\n");
-                    while ((linea = br.readLine()) != null) {
-                        linea=linea.toLowerCase();
-                        linea=caracteresRaros(linea);
-                        linea=numeros(linea);
-                        linea=palabrasvacias(linea);
-                        linea.replaceAll(" +", " ");
-                        System.out.println(linea + "\n");
-                    }
-
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta_procesada + File.separator + archivo.getName()))) {
+                        String linea;
+                        //System.out.println("archivo:" + archivo + "\n");
+                        while ((linea = br.readLine()) != null) {
+                            linea=prepocesar(linea);
+                            writer.write(linea);
+                            writer.newLine();
+                        }
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                     }
                 }catch (IOException e) {
                     e.printStackTrace();
                     return;
@@ -39,9 +39,19 @@ public class filtros{
         }
     }
 
+    public static String prepocesar(String linea)
+    {
+        linea=linea.toLowerCase();
+        linea=caracteresRaros(linea);
+        linea=numeros(linea);
+        linea=palabrasvacias(linea);
+        linea.replaceAll(" +", " ");
+        //System.out.println(linea + "\n");
+        return linea;
+    }
     private static String caracteresRaros(String input)
     {  
-        return input.replaceAll("([.,¿?¡!=]|(?<=\\s)-|-(?=\\s))", "");
+        return input.replaceAll("([.,¿?¡!='()]|(?<=\\s)-|-(?=\\s))", "");
     }
 
     private static String numeros(String input)
