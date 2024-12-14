@@ -45,20 +45,10 @@ public class calcularTF2 {
                 else{
                     HashMap<String, Double> DOC_Peso = new HashMap<>();
                     DOC_Peso.put(archivo, tf);
-<<<<<<< HEAD
                     Tupla t = new Tupla(0, DOC_Peso);
                     indiceInvertido.put(j.getKey(), t);
                 }
             }
-=======
-
-                    Tupla t = new Tupla(0, DOC_Peso); 
-                    
-                    indiceInvertido.put(j.getKey(), t);
-                }
-            }
-                docIdLongitud.put(archivo, Math.sqrt(longitud));
->>>>>>> 0fa3dec8993c46d943fcbd06ea5fbfccf98f2024
         }
         Longitud(docIdLongitud);
         return indiceInvertido;
