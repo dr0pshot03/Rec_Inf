@@ -42,9 +42,8 @@ public class App
         indiceInvertido = calcularTF2.IDF(indiceInvertido, contarArchivosEnCarpeta());
         System.out.println("Se está almacenando el indice invertido.");
         escribirIndiceInvertidoEnArchivo(indiceInvertido, "indiceInvertido.txt");
-    
     }
-
+    
     public static HashMap<String, Tupla> leerIndiceInvertidoDeArchivo(String nombreArchivo) throws IOException {
         HashMap<String, Tupla> indiceInvertido = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo));

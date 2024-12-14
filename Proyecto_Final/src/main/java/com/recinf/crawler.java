@@ -20,7 +20,6 @@ import java.io.File;
 
 class Crawler {
     public static void buscador(String s) {
-        System.out.println(System.getProperty("user.dir"));
         Queue<String> cola = new LinkedList<String>();
         HashSet<String> URLVistadas = new HashSet<String>();
 
