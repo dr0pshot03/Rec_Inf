@@ -33,7 +33,7 @@ public class App
             Crawler.buscador("https://raw.githubusercontent.com/PdedP/RECINF-Project/refs/heads/main/index.html");
             System.out.println("Fin del crawleo.");
         }
-        System.out.println("Se está aplicando los filtros.");
+        System.out.println("Se están aplicando los filtros.");
         filtros.main(args);
         System.out.println("Se está calculando el TF.");
         HashMap<String, HashMap<String, Integer>> termsFrecuencia = calcularTF1.funcionTF1();
@@ -42,10 +42,7 @@ public class App
         indiceInvertido = calcularTF2.IDF(indiceInvertido, contarArchivosEnCarpeta());
         System.out.println("Se está almacenando el indice invertido.");
         escribirIndiceInvertidoEnArchivo(indiceInvertido, "indiceInvertido.txt");
-        
-
-        
-
+    
     }
 
     public static HashMap<String, Tupla> leerIndiceInvertidoDeArchivo(String nombreArchivo) throws IOException {

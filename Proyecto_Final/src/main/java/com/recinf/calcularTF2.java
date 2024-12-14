@@ -11,6 +11,7 @@ public class calcularTF2 {
 
     public static void Longitud(HashMap<String, Double> docIdLongitud)
     {
+        System.out.println("Se está almacenando la longitud de los documentos.");
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("Longitud.txt"));
             for(Map.Entry<String, Double> entry : docIdLongitud.entrySet()){
@@ -31,6 +32,7 @@ public class calcularTF2 {
         for(Map.Entry<String, HashMap<String, Integer>> i : termsFrecuencia.entrySet())
         {
             String archivo = i.getKey();
+            double longitud = 0;
             //System.out.println("Archivo: "+archivo);
             for(Map.Entry<String, Integer> j : i.getValue().entrySet())
             {
@@ -45,12 +47,6 @@ public class calcularTF2 {
                 else{
                     HashMap<String, Double> DOC_Peso = new HashMap<>();
                     DOC_Peso.put(archivo, tf);
-<<<<<<< HEAD
-                    Tupla t = new Tupla(0, DOC_Peso);
-                    indiceInvertido.put(j.getKey(), t);
-                }
-            }
-=======
 
                     HashMap<String, Double> DOC_Longitud = new HashMap<>();
                     DOC_Longitud.put(archivo, Math.pow(tf, 2)); 
@@ -61,7 +57,6 @@ public class calcularTF2 {
                 }
             }
                 docIdLongitud.put(archivo, Math.sqrt(longitud));
->>>>>>> 0fa3dec8993c46d943fcbd06ea5fbfccf98f2024
         }
         Longitud(docIdLongitud);
         return indiceInvertido;
