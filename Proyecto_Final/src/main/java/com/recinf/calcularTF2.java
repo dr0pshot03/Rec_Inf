@@ -1,12 +1,33 @@
 package com.recinf;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class calcularTF2 {
+
+    public static void Longitud(HashMap<String, Double> docIdLongitud)
+    {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("Longitud.txt"));
+            for(Map.Entry<String, Double> entry : docIdLongitud.entrySet()){
+                writer.write("Documento: " + entry.getKey() + "\n");
+                writer.write("Longitud: " + entry.getValue() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
+    }
+        
+
     public static HashMap<String, Tupla> funcionTF2(HashMap<String, HashMap<String, Integer>> termsFrecuencia)
     {
         HashMap<String, Tupla> indiceInvertido = new HashMap<>();
+        HashMap<String, Double> docIdLongitud = new HashMap<>();
         for(Map.Entry<String, HashMap<String, Integer>> i : termsFrecuencia.entrySet())
         {
             String archivo = i.getKey();
@@ -30,16 +51,14 @@ public class calcularTF2 {
                     HashMap<String, Double> DOC_Longitud = new HashMap<>();
                     DOC_Longitud.put(archivo, Math.pow(tf, 2)); 
 
-                    Tupla t = new Tupla(0, DOC_Peso, DOC_Longitud); 
+                    Tupla t = new Tupla(0, DOC_Peso); 
                     
                     indiceInvertido.put(j.getKey(), t);
                 }
             }
-            for (Map.Entry<String, Tupla> entry : indiceInvertido.entrySet()) {
-                Tupla t = entry.getValue();
-                t.docIDLongitud.put(archivo, Math.sqrt(longitud)); 
-            }
+                docIdLongitud.put(archivo, Math.sqrt(longitud));
         }
+        Longitud(docIdLongitud);
         return indiceInvertido;
     }
 
@@ -56,11 +75,9 @@ public class calcularTF2 {
 class Tupla {
     public double idf;
     public HashMap<String, Double> docIDPeso;
-    public HashMap<String, Double> docIDLongitud;
 
-    public Tupla(double idf, HashMap<String, Double> docIDPeso, HashMap<String, Double> docIDLongitud) {
+    public Tupla(double idf, HashMap<String, Double> docIDPeso) {
         this.idf = idf;
         this.docIDPeso = docIDPeso;
-        this.docIDLongitud = docIDLongitud;
     }
 }
