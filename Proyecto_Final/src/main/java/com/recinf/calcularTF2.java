@@ -10,7 +10,6 @@ public class calcularTF2 {
         for(Map.Entry<String, HashMap<String, Integer>> i : termsFrecuencia.entrySet())
         {
             String archivo = i.getKey();
-            double longitud = 0;
             //System.out.println("Archivo: "+archivo);
             for(Map.Entry<String, Integer> j : i.getValue().entrySet())
             {
@@ -21,23 +20,13 @@ public class calcularTF2 {
                     Tupla t = indiceInvertido.get(j.getKey());
                     t.docIDPeso.put(archivo, tf);
                     indiceInvertido.put(j.getKey(), t); // Vuelve a insertar la palabra
-                    longitud += Math.pow(tf, 2);
                 }
                 else{
                     HashMap<String, Double> DOC_Peso = new HashMap<>();
                     DOC_Peso.put(archivo, tf);
-
-                    HashMap<String, Double> DOC_Longitud = new HashMap<>();
-                    DOC_Longitud.put(archivo, Math.pow(tf, 2)); 
-
-                    Tupla t = new Tupla(0, DOC_Peso, DOC_Longitud); 
-                    
+                    Tupla t = new Tupla(0, DOC_Peso);
                     indiceInvertido.put(j.getKey(), t);
                 }
-            }
-            for (Map.Entry<String, Tupla> entry : indiceInvertido.entrySet()) {
-                Tupla t = entry.getValue();
-                t.docIDLongitud.put(archivo, Math.sqrt(longitud)); 
             }
         }
         return indiceInvertido;
@@ -56,11 +45,9 @@ public class calcularTF2 {
 class Tupla {
     public double idf;
     public HashMap<String, Double> docIDPeso;
-    public HashMap<String, Double> docIDLongitud;
 
-    public Tupla(double idf, HashMap<String, Double> docIDPeso, HashMap<String, Double> docIDLongitud) {
+    public Tupla(double idf, HashMap<String, Double> docIDPeso) {
         this.idf = idf;
         this.docIDPeso = docIDPeso;
-        this.docIDLongitud = docIDLongitud;
     }
 }
