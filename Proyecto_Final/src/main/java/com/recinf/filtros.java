@@ -46,6 +46,7 @@ public class filtros{
         linea=caracteresRaros(linea);
         linea=palabrasvacias(linea);
         linea.replaceAll(" +", " ");
+        linea.replaceAll("^ *", "");
         //System.out.println(linea + "\n");
         return linea;
     }
