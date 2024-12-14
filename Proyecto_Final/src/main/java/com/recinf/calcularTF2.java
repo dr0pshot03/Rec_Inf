@@ -43,6 +43,7 @@ public class calcularTF2 {
                     Tupla t = indiceInvertido.get(j.getKey());
                     t.docIDPeso.put(archivo, tf);
                     indiceInvertido.put(j.getKey(), t); // Vuelve a insertar la palabra
+                    longitud += Math.pow(tf, 2);
                 }
                 else{
                     HashMap<String, Double> DOC_Peso = new HashMap<>();
