@@ -24,8 +24,11 @@ public class filtros{
                         //System.out.println("archivo:" + archivo + "\n");
                         while ((linea = br.readLine()) != null) {
                             linea=prepocesar(linea);
-                            writer.write(linea);
-                            writer.newLine();
+                            if(!linea.isEmpty())
+                            {
+                                writer.write(linea);
+                                writer.newLine();
+                            }
                         }
                     }catch (IOException e) {
                         e.printStackTrace();
@@ -45,14 +48,17 @@ public class filtros{
         linea=numeros(linea);
         linea=caracteresRaros(linea);
         linea=palabrasvacias(linea);
-        linea.replaceAll(" +", " ");
-        linea.replaceAll("^ *", "");
+        linea=palabrascortas(linea);
+        linea = linea.replaceAll(" +", " ");
+        linea = linea.replaceAll("^ +", "");
+        linea = linea.replaceAll(" +$", "");
+        linea = linea.replaceAll("[\\s\\r\\n]+$", "");
         //System.out.println(linea + "\n");
         return linea;
     }
     private static String caracteresRaros(String input)
     { 
-        return input.replaceAll("([.,¿?¡!='();\"]|(?<=\\s)-|-(?=\\s))", "");
+        return input.replaceAll("([.,¿?¡!='():;<>\"/&]|(?<=^|\\s)-|-(?=$|\\s)|(?<=\\S)-(?=\\S))", "");
     }
 
     private static String numeros(String input)
@@ -89,4 +95,10 @@ public class filtros{
         }
         return resultado.toString();
     }
+
+    private static String palabrascortas(String input)
+    {  
+        return input.replaceAll("\\b\\w{1,2}\\b", "");
+    }
+
 }
