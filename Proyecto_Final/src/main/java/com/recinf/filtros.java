@@ -24,8 +24,11 @@ public class filtros{
                         //System.out.println("archivo:" + archivo + "\n");
                         while ((linea = br.readLine()) != null) {
                             linea=prepocesar(linea);
-                            writer.write(linea);
-                            writer.newLine();
+                            if(!linea.isEmpty())
+                            {
+                                writer.write(linea);
+                                writer.newLine();
+                            }
                         }
                     }catch (IOException e) {
                         e.printStackTrace();
