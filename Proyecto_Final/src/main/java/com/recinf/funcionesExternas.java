@@ -12,8 +12,32 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.HashSet;
 
 public class funcionesExternas {
+    public static HashMap<String, Double> leerLongitudesDeArchivo(String rutaArchivo) {
+        HashMap<String, Double> longitudes = new HashMap<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            String documento = null;
+            while ((linea = br.readLine()) != null) {
+                if (linea.startsWith("Documento: ")) {
+                    documento = linea.substring(11).trim();
+                } else if (linea.startsWith("Longitud: ")) {
+                    if (documento != null) {
+                        double longitud = Double.parseDouble(linea.substring(10).trim());
+                        longitudes.put(documento, longitud);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return longitudes;
+    }
+
     public static void escribirIndiceInvertidoEnArchivo(HashMap<String, Tupla> indiceInvertido, String nombreArchivo) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo));
         
@@ -77,5 +101,15 @@ public class funcionesExternas {
         }
         reader.close();
         return indiceInvertido;
+    }
+
+    public static HashSet<String> documentos(String palabra, HashMap<String, Tupla> mapa)
+    {
+        HashSet<String> documentos = new HashSet<String>();
+        Tupla t = mapa.get(palabra);
+        for(Map.Entry<String, Double> entry : t.docIDPeso.entrySet()){
+            documentos.add(entry.getKey());
+        }
+        return documentos;
     }
 }

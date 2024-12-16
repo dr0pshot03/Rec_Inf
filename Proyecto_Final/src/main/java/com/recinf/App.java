@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -57,12 +58,15 @@ public class App
 
         System.out.println("Se está cargando en memoria el indice invertido.");
         HashMap<String, Tupla> indice = funcionesExternas.leerIndiceInvertidoDeArchivo("indiceInvertido.txt");
+        HashMap<String, Double> longitud = funcionesExternas.leerLongitudesDeArchivo("Longitud.txt");
         System.out.println("Introduce la palabra que quieres buscar.");
         String buscar = sc.nextLine();
-        sc.close();
-        System.out.println(buscar);
         buscar = filtros.prepocesar(buscar);
-        System.out.println(buscar);
+        System.out.println("Se ha procesado la palabra introducida.");
+        HashSet<String> documentos = funcionesExternas.documentos(buscar, indice);
+
+        /*System.out.println("¿Cuantos documentos quieres que se muestren?");
+        int cantidad = Integer.parseInt(sc.nextLine());*/
 
         System.out.println("El programa ha tardado un total de: "+ (double)(System.nanoTime()-tiempoInicial)/10e9 + " segundos.");
     }
