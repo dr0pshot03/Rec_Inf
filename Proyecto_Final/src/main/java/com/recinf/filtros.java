@@ -45,8 +45,10 @@ public class filtros{
         linea=numeros(linea);
         linea=caracteresRaros(linea);
         linea=palabrasvacias(linea);
-        linea.replaceAll(" +", " ");
-        linea.replaceAll("^ *", "");
+        linea = linea.replaceAll(" +", " ");
+        linea = linea.replaceAll("^ +", "");
+        linea = linea.replaceAll(" +$", "");
+        linea = linea.replaceAll("[\\s\\r\\n]+$", "");
         //System.out.println(linea + "\n");
         return linea;
     }
