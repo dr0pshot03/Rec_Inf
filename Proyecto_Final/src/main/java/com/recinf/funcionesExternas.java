@@ -112,4 +112,19 @@ public class funcionesExternas {
         }
         return documentos;
     }
+
+    public static HashMap<String, Double> ranking(String palabra, HashMap<String, Tupla> indice, HashMap<String, Double> longitud)
+    {
+        
+        HashMap<String, Double> ranking = new HashMap<>();
+        Tupla p = indice.get(palabra);
+        for(Map.Entry<String, Double> doc : p.docIDPeso.entrySet())
+        {
+            double valor = (p.idf*doc.getValue())/(longitud.get(doc.getKey())*p.idf);//No se eleva al cuadrado al ser anulado por la raiz ya que solo lo calculamos para ubna palabra
+            ranking.put(doc.getKey(), valor);
+        }
+        return ranking;
+    }
 }
+
+
