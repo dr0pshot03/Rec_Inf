@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -65,8 +66,22 @@ public class App
         System.out.println("Se ha procesado la palabra introducida.");
         HashSet<String> documentos = funcionesExternas.documentos(buscar, indice);
 
-        /*System.out.println("¿Cuantos documentos quieres que se muestren?");
-        int cantidad = Integer.parseInt(sc.nextLine());*/
+        HashMap<String, Double> ranking = funcionesExternas.ranking(buscar, indice, longitud);
+
+        List<Map.Entry<String, Double>> lista = funcionesExternas.ordenarHashMapPorValor(ranking);
+
+        System.out.println("¿Cuantos documentos quieres que se muestren?");
+        int cantidad = Integer.parseInt(sc.nextLine());
+
+        for (Map.Entry<String, Double> entry : lista) {
+            if(cantidad>0)
+            {
+                System.out.println("Clave: " + entry.getKey() + ", Ranking: " + entry.getValue());
+                cantidad--;
+            }
+        }
+
+        
 
         System.out.println("El programa ha tardado un total de: "+ (double)(System.nanoTime()-tiempoInicial)/10e9 + " segundos.");
     }

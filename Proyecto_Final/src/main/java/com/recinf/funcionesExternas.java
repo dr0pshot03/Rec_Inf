@@ -10,9 +10,11 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.HashSet;
+import java.util.List;
 
 public class funcionesExternas {
     public static HashMap<String, Double> leerLongitudesDeArchivo(String rutaArchivo) {
@@ -124,6 +126,16 @@ public class funcionesExternas {
             ranking.put(doc.getKey(), valor);
         }
         return ranking;
+    }
+
+    public static List<Map.Entry<String, Double>> ordenarHashMapPorValor(HashMap<String, Double> map) {
+        // Convertir el HashMap en una lista de entradas
+        List<Map.Entry<String, Double>> lista = new ArrayList<>(map.entrySet());
+
+        // Ordenar la lista por el valor (Double) en orden descendente
+        lista.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+        return lista;
     }
 }
 
