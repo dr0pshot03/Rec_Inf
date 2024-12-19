@@ -50,8 +50,8 @@ public class App
             filtros.main(args);
             System.out.println("Se está calculando el TF.");
             HashMap<String, HashMap<String, Integer>> termsFrecuencia = calcularTF1.funcionTF1();
+            System.out.println("Se está calculando el indice invertido y la longitud.");
             HashMap<String, Tupla> indiceInvertido = calcularTF2.funcionTF2(termsFrecuencia);
-            System.out.println("Se está calculando el indice invertido.");
             indiceInvertido = calcularTF2.IDF(indiceInvertido, funcionesExternas.contarArchivosEnCarpeta());
             System.out.println("Se está almacenando el indice invertido.");
             funcionesExternas.escribirIndiceInvertidoEnArchivo(indiceInvertido, "indiceInvertido.txt");
@@ -76,7 +76,7 @@ public class App
         for (Map.Entry<String, Double> entry : lista) {
             if(cantidad>0)
             {
-                System.out.println("Clave: " + entry.getKey() + ", Ranking: " + entry.getValue());
+                System.out.println("Documento: " + entry.getKey() + ", Ranking: " + entry.getValue());
                 cantidad--;
             }
         }
