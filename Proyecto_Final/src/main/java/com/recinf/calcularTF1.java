@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class calcularTF1 {
 
-    public static HashMap funcionTF1()
+    public static HashMap<String, HashMap<String, Integer>> funcionTF1()
     {
         HashMap<String, HashMap<String, Integer>> mapa = new HashMap<>();
         String ruta_procesada = System.getProperty("user.dir") + File.separator + "corpus_procesado\\";

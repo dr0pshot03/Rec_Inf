@@ -48,6 +48,7 @@ public class filtros{
         linea=numeros(linea);
         linea=caracteresRaros(linea);
         linea=palabrasvacias(linea);
+        linea=palabrascortas(linea);
         linea = linea.replaceAll(" +", " ");
         linea = linea.replaceAll("^ +", "");
         linea = linea.replaceAll(" +$", "");
@@ -57,7 +58,7 @@ public class filtros{
     }
     private static String caracteresRaros(String input)
     { 
-        return input.replaceAll("([.,¿?¡!='();\"]|(?<=\\s)-|-(?=\\s))", "");
+        return input.replaceAll("([.,¿?¡!='():;<>\"/&]|(?<=^|\\s)-|-(?=$|\\s)|(?<=\\S)-(?=\\S))", "");
     }
 
     private static String numeros(String input)
@@ -94,4 +95,10 @@ public class filtros{
         }
         return resultado.toString();
     }
+
+    private static String palabrascortas(String input)
+    {  
+        return input.replaceAll("\\b\\w{1,2}\\b", "");
+    }
+
 }
