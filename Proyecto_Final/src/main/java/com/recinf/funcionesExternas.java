@@ -118,7 +118,7 @@ public class funcionesExternas {
     public static HashMap<String, Double> ranking(String palabra, HashMap<String, Tupla> indice, HashMap<String, Double> longitud)
     {
         
-        HashMap<String, Double> ranking = new HashMap<>();
+        HashMap<String, Double> ranking = new HashMap<String, Double>();
         try{
             Tupla p = indice.get(palabra);
             for(Map.Entry<String, Double> doc : p.docIDPeso.entrySet())

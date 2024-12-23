@@ -64,25 +64,28 @@ public class App
         String buscar = sc.nextLine();
         buscar = filtros.prepocesar(buscar);
         System.out.println("Se ha procesado la palabra introducida.");
-        HashSet<String> documentos = funcionesExternas.documentos(buscar, indice);
+        //HashSet<String> documentos = funcionesExternas.documentos(buscar, indice);
 
         HashMap<String, Double> ranking = funcionesExternas.ranking(buscar, indice, longitud);
 
-        List<Map.Entry<String, Double>> lista = funcionesExternas.ordenarHashMapPorValor(ranking);
+        if (!ranking.isEmpty())
+        {
+            List<Map.Entry<String, Double>> lista = funcionesExternas.ordenarHashMapPorValor(ranking);
 
-        System.out.println("¿Cuantos documentos quieres que se muestren?");
-        int cantidad = Integer.parseInt(sc.nextLine());
+            System.out.println("¿Cuantos documentos quieres que se muestren?");
+            int cantidad = Integer.parseInt(sc.nextLine());
 
-        for (Map.Entry<String, Double> entry : lista) {
-            if(cantidad>0)
-            {
-                System.out.println("Documento: " + entry.getKey() + ", Ranking: " + entry.getValue());
-                cantidad--;
+            for (Map.Entry<String, Double> entry : lista) {
+                if(cantidad>0)
+                {
+                    System.out.println("Documento: " + entry.getKey() + ", Ranking: " + entry.getValue());
+                    cantidad--;
+                }
+                else if (cantidad == 0) break;
             }
         }
 
-        
-
-        System.out.println("El programa ha tardado un total de: "+ (double)(System.nanoTime()-tiempoInicial)/10e9 + " segundos.");
+        long tiempoFinal = System.nanoTime();
+        System.out.println("El programa ha tardado un total de: "+ (double)(tiempoFinal-tiempoInicial)/1e9 + " segundos.");
     }
 }
