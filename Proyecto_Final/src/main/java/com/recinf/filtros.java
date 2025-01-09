@@ -58,7 +58,7 @@ public class filtros{
     }
     private static String caracteresRaros(String input)
     { 
-        return input.replaceAll("([.,¿?¡!='():;<>\"/&]|(?<=^|\\s)-|-(?=$|\\s)|(?<=\\S)-(?=\\S))", "");
+        return input.replaceAll("([.,¿?¡!='():;<>\"/&]|(?<=^|\\s)-|-(?=$|\\s))", "");
     }
 
     private static String numeros(String input)
