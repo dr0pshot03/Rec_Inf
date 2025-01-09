@@ -62,11 +62,12 @@ public class App
         HashMap<String, Double> longitud = funcionesExternas.leerLongitudesDeArchivo("Longitud.txt");
         System.out.println("Introduce la palabra que quieres buscar.");
         String buscar = sc.nextLine();
-        buscar = filtros.prepocesar(buscar);
+        String buscar_proc = filtros.prepocesar(buscar);
         System.out.println("Se ha procesado la palabra introducida.");
+        System.out.println(buscar_proc);
         //HashSet<String> documentos = funcionesExternas.documentos(buscar, indice);
 
-        HashMap<String, Double> ranking = funcionesExternas.ranking(buscar, indice, longitud);
+        HashMap<String, Double> ranking = funcionesExternas.ranking(buscar_proc, indice, longitud);
 
         if (!ranking.isEmpty())
         {
@@ -74,11 +75,13 @@ public class App
 
             System.out.println("¿Cuantos documentos quieres que se muestren?");
             int cantidad = Integer.parseInt(sc.nextLine());
+            System.out.println("\n");
 
             for (Map.Entry<String, Double> entry : lista) {
                 if(cantidad>0)
                 {
                     System.out.println("Documento: " + entry.getKey() + ", Ranking: " + entry.getValue());
+                    funcionesExternas.muestraFrase(buscar, entry.getKey());
                     cantidad--;
                 }
                 else if (cantidad == 0) break;

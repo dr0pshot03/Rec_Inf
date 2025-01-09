@@ -144,6 +144,45 @@ public class funcionesExternas {
 
         return lista;
     }
+
+    public static void muestraFrase(String palabra, String archivo)
+    {
+        String ruta = System.getProperty("user.dir") + File.separator + "corpus" + File.separator + archivo;
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_VERDE = "\u001B[32m";
+        String ANSI_AMARILLO = "\u001B[33m";
+
+        palabra = palabra.toLowerCase();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+            StringBuilder contenido = new StringBuilder();
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                linea = linea.toLowerCase();
+                contenido.append(linea).append(" ");
+            }
+            // Dividir el contenido en un array de Strings
+            String[] palabras = contenido.toString().split("\\s+");
+            // Buscar la palabra en el array y mostrar el contexto
+            for (int i = 0; i < palabras.length; i++) {
+                if (palabras[i].equals(palabra)) {
+                    int start = Math.max(0, i - 3);
+                    int end = Math.min(palabras.length, i + 4);
+                    for (int j = start; j < end; j++) {
+                        if (j == i) {
+                            System.out.print(ANSI_AMARILLO+"[" + palabras[j] + "] "+ANSI_RESET);
+                        } else {
+                            System.out.print(ANSI_VERDE+ palabras[j] + " "+ANSI_RESET);
+                        }
+                    }
+                    System.out.println();
+                    System.out.println(ANSI_AMARILLO+"--------------------------------------------------"+ANSI_RESET);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
+    }
 }
 
 
