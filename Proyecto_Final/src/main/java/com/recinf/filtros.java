@@ -58,7 +58,8 @@ public class filtros{
     }
     private static String caracteresRaros(String input)
     { 
-        return input.replaceAll("([.,¿?¡!='():;<>\"/&]|(?<=^|\\s)-|-(?=$|\\s))", "");
+        input =input.replaceAll("([.,¿?¡!='()$:|{};<>\"/&%+*\\[\\]])", "");
+        return input.replaceAll("(?<=^|\\s)-+|-(?=$|\\s)", "");
     }
 
     private static String numeros(String input)
@@ -98,7 +99,10 @@ public class filtros{
 
     private static String palabrascortas(String input)
     {  
-        return input.replaceAll("\\b\\w{1,2}\\b", "");
+        while (input.matches(".*(^|\\s)\\w{1,2}(\\s|$).*")) {
+            input = input.replaceAll("(^|\\s)\\w{1,2}(\\s|$)", "");
+        }
+        return input;
     }
 
 }
