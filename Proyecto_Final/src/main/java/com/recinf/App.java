@@ -75,7 +75,6 @@ public class App
 
             System.out.println("¿Cuantos documentos quieres que se muestren?");
             int cantidad = Integer.parseInt(sc.nextLine());
-            System.out.println("\n");
 
             for (Map.Entry<String, Double> entry : lista) {
                 if(cantidad>0)

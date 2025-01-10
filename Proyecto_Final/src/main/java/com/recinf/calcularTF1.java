@@ -13,9 +13,6 @@ public class calcularTF1 {
         HashMap<String, HashMap<String, Integer>> mapa = new HashMap<>();
         String ruta_procesada = System.getProperty("user.dir") + File.separator + "corpus_procesado" + File.separator;
         File directory = new File(ruta_procesada);
-        if (!directory.exists()) {
-            directory.mkdirs(); // Crear el directorio si no existe
-        }
         if (directory.isDirectory()){
             File[] archivos = directory.listFiles();
             for (File archivo : archivos) {

@@ -15,6 +15,10 @@ public class filtros{
         String ruta = System.getProperty("user.dir") + File.separator + "corpus\\";
         String ruta_procesada = System.getProperty("user.dir") + File.separator + "corpus_procesado\\";
         File directory = new File(ruta);
+        File directorio2 = new File(ruta_procesada);
+        if (!directorio2.exists()) {
+            directorio2.mkdirs(); // Crear el directorio si no existe
+        }
         if (directory.isDirectory()){
             File[] archivos = directory.listFiles();
             for (File archivo : archivos) {
