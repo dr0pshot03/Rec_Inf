@@ -17,13 +17,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class App 
+public class App
 {
     public static void main( String[] args ) throws Exception
     {
         long tiempoInicial = System.nanoTime();
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RESET = "\u001B[0m";
 
-        System.out.println("¿Deseas indexar los archivos?");
+        System.out.println(ANSI_YELLOW + "¿Deseas indexar los archivos?" + ANSI_RESET);
         String ind = new String();
         Scanner sc = new Scanner(System.in);
         while (!ind.equals("S") && !ind.equals("N")) {
@@ -32,7 +34,7 @@ public class App
         }
         if (ind.equals("S"))
         {
-            System.out.println("¿Deseas crawlear?");
+            System.out.println(ANSI_YELLOW + "¿Deseas crawlear?" + ANSI_RESET);
             String resp = new String();
             Scanner scan = new Scanner(System.in);
             while (!resp.equals("S") && !resp.equals("N")) {
@@ -60,7 +62,7 @@ public class App
         System.out.println("Se está cargando en memoria el indice invertido.");
         HashMap<String, Tupla> indice = funcionesExternas.leerIndiceInvertidoDeArchivo("indiceInvertido.txt");
         HashMap<String, Double> longitud = funcionesExternas.leerLongitudesDeArchivo("Longitud.txt");
-        System.out.println("Introduce la palabra que quieres buscar.");
+        System.out.println(ANSI_YELLOW + "Introduce la palabra que quieres buscar." + ANSI_RESET);
         String buscar = sc.nextLine();
         String buscar_proc = filtros.prepocesar(buscar);
         System.out.println("Se ha procesado la palabra introducida.");
@@ -73,7 +75,7 @@ public class App
         {
             List<Map.Entry<String, Double>> lista = funcionesExternas.ordenarHashMapPorValor(ranking);
 
-            System.out.println("¿Cuantos documentos quieres que se muestren?");
+            System.out.println(ANSI_YELLOW + "¿Cuantos documentos quieres que se muestren?" + ANSI_RESET);
             int cantidad = Integer.parseInt(sc.nextLine());
 
             for (Map.Entry<String, Double> entry : lista) {
@@ -83,7 +85,7 @@ public class App
                     funcionesExternas.muestraFrase(buscar, entry.getKey());
                     cantidad--;
                 }
-                else if (cantidad == 0) break;
+                else break;
             }
         }
 
