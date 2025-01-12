@@ -66,7 +66,6 @@ public class App
         String buscar = sc.nextLine();
         String buscar_proc = filtros.prepocesar(buscar);
         System.out.println("Se ha procesado la palabra introducida.");
-        System.out.println(buscar_proc);
         //HashSet<String> documentos = funcionesExternas.documentos(buscar, indice);
 
         HashMap<String, Double> ranking = funcionesExternas.ranking(buscar_proc, indice, longitud);
