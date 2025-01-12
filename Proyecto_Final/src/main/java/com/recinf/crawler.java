@@ -43,7 +43,7 @@ class Crawler {
             String[] sp = p.split("/");
             String fileName = ruta + sp[sp.length - 1]; // Nombre que tendrá el archivo.
             if (!URLVistadas.contains(p)) { // Comprueba que el archivo no esté almacenado.
-                if (sp[sp.length - 2].equals("corpus")) { //Comprueba que sea corpus
+                if (sp[sp.length - 2].equals("corpus") && !URLVistadas.contains(sp[sp.length-1])) { //Comprueba que sea corpus
                     try{
                         URL url = new URL(p);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

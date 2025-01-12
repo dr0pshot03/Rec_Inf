@@ -36,13 +36,13 @@ public class calcularTF2 {
             
             for(Map.Entry<String, Integer> j : i.getValue().entrySet())
             {
-                double tf = 1 + Math.log(j.getValue()) / Math.log(2);
+                double tf = 1 + Math.log10(j.getValue()) / Math.log10(2);
 
                 if (indiceInvertido.containsKey(j.getKey()))
                 {
                     Tupla t = indiceInvertido.get(j.getKey());
                     t.docIDPeso.put(archivo, tf);
-                    indiceInvertido.put(j.getKey(), t); // Vuelve a insertar la palabra
+                    indiceInvertido.put(j.getKey(), t); // Actualiza el hashmap
                     longitud += Math.pow(tf, 2);
                 }
                 else{
@@ -62,7 +62,7 @@ public class calcularTF2 {
     {
         for(Map.Entry<String, Tupla> j : indiceInvertido.entrySet())
         {
-            j.getValue().idf = Math.log((double)totalDocumentos / j.getValue().docIDPeso.size()) / Math.log(2);
+            j.getValue().idf = Math.log10((double)totalDocumentos / j.getValue().docIDPeso.size()) / Math.log10(2);
         }
         return indiceInvertido;
     }

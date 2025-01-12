@@ -41,7 +41,6 @@ public class App
                 System.out.println("Introduce S para SI y N para NO");
                 resp = scan.nextLine().trim().toUpperCase();
             }
-            //scan.close();
             if (resp.equals("S")) 
             {
                 System.out.println("Se está crawleando en busca de archivos nuevos.");
