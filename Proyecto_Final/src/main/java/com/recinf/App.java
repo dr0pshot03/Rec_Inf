@@ -90,6 +90,7 @@ public class App
         }
 
         long tiempoFinal = System.nanoTime();
+        sc.close();
         System.out.println("El programa ha tardado un total de: "+ (double)(tiempoFinal-tiempoInicial)/1e9 + " segundos.");
     }
 }

@@ -33,7 +33,7 @@ public class calcularTF2 {
         {
             String archivo = i.getKey();
             double longitud = 0;
-            //System.out.println("Archivo: "+archivo);
+            
             for(Map.Entry<String, Integer> j : i.getValue().entrySet())
             {
                 double tf = 1 + Math.log(j.getValue()) / Math.log(2);
