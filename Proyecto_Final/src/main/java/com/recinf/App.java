@@ -47,11 +47,7 @@ public class App
             Scanner scan = new Scanner(System.in);
             while (!resp.equals("S") && !resp.equals("N")) {
                 System.out.println("Introduce S para SI y N para NO");
-                if(!directory.isDirectory()){
-                    System.out.println(ANSI_GREEN+"Al ser la primera vez que se ejecuta se va a proceder a crawlear."+ANSI_RESET);
-                    resp = "S";
-                }
-                else resp = scan.nextLine().trim().toUpperCase();
+                resp = scan.nextLine().trim().toUpperCase();
             }
             if (resp.equals("S")) 
             {
