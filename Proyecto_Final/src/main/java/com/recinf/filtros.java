@@ -56,7 +56,6 @@ public class filtros{
         linea = linea.replaceAll(" +", " ");
         linea = linea.replaceAll("^ +", "");
         linea = linea.replaceAll(" +$", "");
-        linea = linea.replaceAll("[\\s\\r\\n]+$", "");
         //System.out.println(linea + "\n");
         return linea;
     }
