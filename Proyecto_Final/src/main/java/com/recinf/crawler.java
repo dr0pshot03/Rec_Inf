@@ -42,8 +42,8 @@ class Crawler {
             String p = cola.poll();
             String[] sp = p.split("/");
             String fileName = ruta + sp[sp.length - 1]; // Nombre que tendrá el archivo.
-            if (!URLVistadas.contains(p)) {
-                if (sp[sp.length - 2].equals("corpus") && !URLVistadas.contains(sp[sp.length-1])) { //Comprueba que sea corpus y que no esté ya almacenado.
+            if (!URLVistadas.contains(p)) { // Comprueba que el archivo no esté almacenado.
+                if (sp[sp.length - 2].equals("corpus") && !URLVistadas.contains(sp[sp.length-1])) { //Comprueba que sea corpus
                     try{
                         URL url = new URL(p);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -69,15 +69,6 @@ class Crawler {
                 } else {
                     try {
                         Document doc = Jsoup.connect(p).get();
-
-                        //Omitimos el almacenaje del html inicial
-
-                        /*try (FileWriter writer = new FileWriter(fileName)) {
-                            writer.write(doc.outerHtml()); // Guarda el contenido HTML en el archivo.
-                            URLVistadas.add(p);
-                            System.out.println("Guardado en: " + fileName);
-                        }*/
-
                         Elements a = doc.select("a"); // Selecciona todas las etiquetas <a>
                         String aux = new String();
 
@@ -108,6 +99,6 @@ class Crawler {
                     }
                 }
             }
-        } while (!cola.isEmpty()); // El programa parará si la cola está vacía o ha llegado al nº máximo de descargas.
+        } while (!cola.isEmpty()); // El programa parará si la cola está vacía.
     }
 }

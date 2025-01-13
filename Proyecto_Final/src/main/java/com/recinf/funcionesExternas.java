@@ -123,7 +123,7 @@ public class funcionesExternas {
             Tupla p = indice.get(palabra);
             for(Map.Entry<String, Double> doc : p.docIDPeso.entrySet())
             {
-                double valor = (p.idf*doc.getValue())/(longitud.get(doc.getKey())*p.idf);//No se eleva al cuadrado al ser anulado por la raiz ya que solo lo calculamos para ubna palabra
+                double valor = (p.idf*doc.getValue())/(longitud.get(doc.getKey())*p.idf);//No se eleva al cuadrado al ser anulado por la raiz ya que solo lo calculamos para una palabra
                 ranking.put(doc.getKey(), valor);
             }
         }catch(Exception e)

@@ -41,7 +41,6 @@ public class App
                 System.out.println("Introduce S para SI y N para NO");
                 resp = scan.nextLine().trim().toUpperCase();
             }
-            //scan.close();
             if (resp.equals("S")) 
             {
                 System.out.println("Se está crawleando en busca de archivos nuevos.");
@@ -66,7 +65,6 @@ public class App
         String buscar = sc.nextLine();
         String buscar_proc = filtros.prepocesar(buscar);
         System.out.println("Se ha procesado la palabra introducida.");
-        System.out.println(buscar_proc);
         //HashSet<String> documentos = funcionesExternas.documentos(buscar, indice);
 
         HashMap<String, Double> ranking = funcionesExternas.ranking(buscar_proc, indice, longitud);
@@ -90,6 +88,7 @@ public class App
         }
 
         long tiempoFinal = System.nanoTime();
+        sc.close();
         System.out.println("El programa ha tardado un total de: "+ (double)(tiempoFinal-tiempoInicial)/1e9 + " segundos.");
     }
 }
