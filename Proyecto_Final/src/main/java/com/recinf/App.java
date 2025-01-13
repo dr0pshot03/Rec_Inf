@@ -24,13 +24,21 @@ public class App
         long tiempoInicial = System.nanoTime();
         String ANSI_YELLOW = "\u001B[33m";
         String ANSI_RESET = "\u001B[0m";
+        String ANSI_GREEN = "\u001B[32m";
+
+        String ruta = System.getProperty("user.dir") + File.separator + "corpus_procesado";
+        File directory = new File(ruta);
 
         System.out.println(ANSI_YELLOW + "¿Deseas indexar los archivos?" + ANSI_RESET);
         String ind = new String();
         Scanner sc = new Scanner(System.in);
         while (!ind.equals("S") && !ind.equals("N")) {
             System.out.println("Introduce S para SI y N para NO");
-            ind = sc.nextLine().trim().toUpperCase();
+            if(!directory.isDirectory()){
+                System.out.println(ANSI_GREEN+"Al ser la primera vez que se ejecuta se va a proceder a indexar."+ANSI_RESET);
+                ind = "S";
+            }
+            else ind = sc.nextLine().trim().toUpperCase();
         }
         if (ind.equals("S"))
         {
@@ -39,7 +47,11 @@ public class App
             Scanner scan = new Scanner(System.in);
             while (!resp.equals("S") && !resp.equals("N")) {
                 System.out.println("Introduce S para SI y N para NO");
-                resp = scan.nextLine().trim().toUpperCase();
+                if(!directory.isDirectory()){
+                    System.out.println(ANSI_GREEN+"Al ser la primera vez que se ejecuta se va a proceder a crawlear."+ANSI_RESET);
+                    resp = "S";
+                }
+                else resp = scan.nextLine().trim().toUpperCase();
             }
             if (resp.equals("S")) 
             {
