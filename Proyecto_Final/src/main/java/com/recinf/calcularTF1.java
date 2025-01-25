@@ -36,7 +36,7 @@ public class calcularTF1 {
 
                     }
 
-                    mapa.put(archivo.getName(), frec_terminos);
+                    mapa.put(archivo.getName(), frec_terminos); // nombre documento, [termino, frecuencia]
                     
                 }catch (IOException e) {
                     e.printStackTrace(); // Manejo de excepciones si ocurre un error al leer el archivo

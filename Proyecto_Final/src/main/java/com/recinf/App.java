@@ -62,6 +62,7 @@ public class App
             System.out.println("Se está calculando el indice invertido y la longitud.");
             HashMap<String, Tupla> indiceInvertido = calcularTF2.funcionTF2(termsFrecuencia);
             indiceInvertido = calcularTF2.IDF(indiceInvertido, funcionesExternas.contarArchivosEnCarpeta());
+            calcularTF2.Longitud2(indiceInvertido, termsFrecuencia);
             System.out.println("Se está almacenando el indice invertido.");
             funcionesExternas.escribirIndiceInvertidoEnArchivo(indiceInvertido, "indiceInvertido.txt");
         }
